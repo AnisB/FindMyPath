@@ -7,12 +7,9 @@ set (CMAKE_CXX_FLAGS "-fpermissive")
 set( SOURCE 
 	src/MapLoader.cpp
 	src/PathFindAStar.cpp
-	src/Renderer.cpp)
+	src/Renderer.cpp
+	src/Map.cpp)
  
-IF(UNIX)
-
-  TARGET_LINK_LIBRARIES( math)
-ENDIF(UNIX)
  
 add_executable(FindMyPath src/FindMyPath.cpp ${SOURCE})
  
