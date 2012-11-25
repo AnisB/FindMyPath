@@ -57,7 +57,7 @@ void Renderer::render()
 }
 void Renderer::drawMap()
 {
-  int ** map=myMap->getGridMap();
+  char ** map=myMap->getGridMap();
   int nL = myMap->getSizeX();
   int nC = myMap->getSizeY();
   int cx = 800/nL -1;
@@ -67,7 +67,7 @@ void Renderer::drawMap()
      for(int j=0;j<nC;j++)
      {
 	Shape carre;
-        if(map[i][j]==0)
+        if(map[i][j]==Wall)
 	{
 		carre.AddPoint(cx*i+0, cy*j+0, Color(0,0,0), Color(255,255,255));
 		carre.AddPoint(cx*i+0, cy*j+cy, Color(0,0,0), Color(255,255,255));
@@ -77,7 +77,7 @@ void Renderer::drawMap()
     		carre.EnableOutline(true); // Bordures activées
     		carre.SetOutlineWidth(1); // Bordures de taille 20 pixels
 	}
-	else if(map[i][j]==1)
+	else if(map[i][j]==Dirt)
 	{
 		carre.AddPoint(cx*i+0, cy*j+0, Color(255, 90, 20), Color(255,255,255));
 		carre.AddPoint(cx*i+0, cy*j+cy, Color(255, 90, 20), Color(255,255,255));
@@ -90,8 +90,18 @@ void Renderer::drawMap()
 	myApp->Draw(carre);
      }
   }
-  std::list<TPoint>::iterator it;
-  for(it=path.begin();it!=path.end();it++)
+  std::list<TPoint>::iterator it=path.begin();
+    Shape begin;
+    begin.AddPoint(cx*(*it).x+0, cy*(*it).y+0, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint(cx*(*it).x+0, cy*(*it).y+cy, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint(cx*(*it).x+cx, cy*(*it).y+cy, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint(cx*(*it).x+cx, cy*(*it).y+0, Color(20,150,20), Color(255,255,255));
+    begin.EnableFill(true); // Remplissage activé
+    begin.EnableOutline(true); // Bordures activées
+    begin.SetOutlineWidth(1); // Bordures de taille 20 pixels
+    myApp->Draw(begin);
+    it++;
+  for(;it!=path.end();it++)
   {
     Shape carre;
     carre.AddPoint(cx*(*it).x+0, cy*(*it).y+0, Color(60,20,200), Color(255,255,255));

@@ -23,6 +23,9 @@
  */
 
 #include "Types.h"
+#define Wall 'T'
+#define Dirt '.'
+
 class TMap
 {
 protected:
@@ -30,7 +33,7 @@ protected:
     int myMapSizeX;
     int myMapSizeY;
     Graph myGraph;
-    int ** myGridMap; 
+    char ** myGridMap; 
 public:
     int getSizeX()
     {
@@ -42,7 +45,7 @@ public:
     }
     TMap(int x, int y);
 
-    int ** getGridMap();
+    char ** getGridMap();
     Graph getGraph();
 
     void GridToGraph();

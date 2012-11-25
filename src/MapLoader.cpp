@@ -66,38 +66,60 @@ vector<string> MapLoader::split ( string &chaine, char c )
 
 TMap*	MapLoader::LoadMap(std::string fileName)
 {
-
     string line;
     ifstream myfile (fileName.c_str());
     getline (myfile,line);
-    int nL=StringToNumber (line );
-    getline (myfile,line);
-    int nC=StringToNumber (line );  
 
-    myMap = new TMap(nL,nC);
-    int ** map =myMap->getGridMap();
-    if (myfile.is_open())
+    if(line=="B")
     {
-	int l=0;
-	while ( myfile.good() && l<nL )
-	{
+    	    getline (myfile,line);
+	    int nL=StringToNumber (line );
 	    getline (myfile,line);
-	    std::vector<std::string> aLine = split(line,' ');
-	    for(int i=0;i<nC;i++)
-	    {
-		int x=StringToNumber(aLine[i]);
-		map[l][i]=x;
-	    }
+	    int nC=StringToNumber (line );  
 
-	    l++;
-	}
+	    myMap = new TMap(nL,nC);
+	    char ** map =myMap->getGridMap();
+		int l=0;
+		while ( myfile.good() && l<nL )
+		{
+		    getline (myfile,line);
+		    std::vector<std::string> aLine = split(line,' ');
+		    for(int i=0;i<nC;i++)
+		    {
+		
+			map[l][i]=aLine[i][0];
+		    }
 
-	myfile.close();
+		    l++;
+		}
+
+		myfile.close();
 		
     }
-    else
+    else if(line=="A")
     {
-	cout<<"Problème d'ouverture fichier"<<endl;
+	    getline (myfile,line);
+	    int nL=StringToNumber (line );
+	    getline (myfile,line);
+	    int nC=StringToNumber (line );  
+
+	    myMap = new TMap(nL,nC);
+	    char ** map =myMap->getGridMap();
+		int l=0;
+		while ( myfile.good() && l<nL )
+		{
+		    getline (myfile,line);
+	
+		    for(int i=0;i<nC;i++)
+		    {
+		
+			map[l][i]=line[i];
+		    }
+
+		    l++;
+		}
+
+		myfile.close();
     }
     myMap->GridToGraph();
     return myMap;

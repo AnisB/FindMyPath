@@ -27,21 +27,21 @@ TMap::TMap(int x, int y)
 {
     myMapSizeX=x;
     myMapSizeY=y;
-    myGridMap = new  int * [myMapSizeX];
+    myGridMap = new  char * [myMapSizeX];
     for (int i = 0; i < myMapSizeX; i++)
     {
-	myGridMap[i] = new int [myMapSizeY];
+	myGridMap[i] = new char [myMapSizeY];
     }
     for( int i =0;i<myMapSizeX;i++)
     {
 	for( int j =0;j<myMapSizeY;j++)
 	{
-	    myGridMap[i][j]=0;
+	    myGridMap[i][j]=Wall;
 	}
     }	
 }
 
-int ** TMap::getGridMap()
+char ** TMap::getGridMap()
 {
     return myGridMap;
 }
@@ -58,33 +58,33 @@ void TMap::GridToGraph()
     {
 	for( int j =0;j<myMapSizeY;j++)
 	{
-	    if(myGridMap[i][j]!=0)
+	    if(myGridMap[i][j]!=Wall)
 	    {
 		TPoint newNode;
 		newNode.x=i;
 		newNode.y=j;
-		if((i!=0) && (myGridMap[i-1][j]!=0) )
+		if((i!=0) && (myGridMap[i-1][j]!=Wall) )
 		{
 		    TPoint a;
 		    a.x=i-1;
 		    a.y=j;
 		    newNode.points.push_back(a);
 		}
-		if( (i!=(myMapSizeX-1)) && (myGridMap[i+1][j]!=0))
+		if( (i!=(myMapSizeX-1)) && (myGridMap[i+1][j]!=Wall))
 		{
 		    TPoint a;
 		    a.x=i+1;
 		    a.y=j;
 		    newNode.points.push_back(a);
 		}
-		if((j!=0) && (myGridMap[i][j-1]!=0))
+		if((j!=0) && (myGridMap[i][j-1]!=Wall))
 		{
 		    TPoint a;
 		    a.x=i;
 		    a.y=j-1;
 		    newNode.points.push_back(a);
 		}
-		if( (j!=(myMapSizeY-1)) && (myGridMap[i][j+1]!=0))
+		if( (j!=(myMapSizeY-1)) && (myGridMap[i][j+1]!=Wall))
 		{
 		    TPoint a;
 		    a.x=i;

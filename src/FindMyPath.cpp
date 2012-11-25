@@ -28,8 +28,8 @@ using namespace std;
 int main()
 {
     Renderer aRenderer;
-    aRenderer.getMap("../Samples/aMap.map");
-    aRenderer.AStar(0,0,10,20);
+    aRenderer.getMap("Samples/midd.map");
+    aRenderer.AStar(5,5,40,40);
     aRenderer.render();
     return 0;
 }
