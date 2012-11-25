@@ -32,6 +32,14 @@ protected:
     Graph myGraph;
     int ** myGridMap; 
 public:
+    int getSizeX()
+    {
+       return myMapSizeX;
+    }
+    int getSizeY()
+    {
+       return myMapSizeY;
+    }
     TMap(int x, int y);
 
     int ** getGridMap();

@@ -22,16 +22,20 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 #include <iostream>
-#include "Types.h"
-
-
+#include <SFML/Graphics.hpp>
+#include "MapLoader.h"
 class Renderer
 {
 protected:
-    Map
-    public:
+    sf::RenderWindow * myApp;
+    TMap * myMap;
+    std::list<TPoint> path;
+public:
     Renderer();
     ~Renderer();
+    void render();
+    void drawMap();
     void getMap(std::string aFileName);
-    printMap();
+    void printMap();
+    void AStar(int x, int y , int x1, int y1);
 };
