@@ -23,25 +23,78 @@
  */
 #include"PathFindAStar.h"
 #include <list>
+#include <map>
 #include "math.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 using namespace std;
 
 typedef map<pair<int,int>,pair<int,int> > Visited;
+
+
+
+
+
 double computeHeuristic(TPoint  a, TPoint b)
 {
-    if((a.x!=b.x)&&(a.y!=b.y))	
+    if((a.x!=b.x)||(a.y!=b.y))	
     {
 	unsigned int diffX =abs(a.x-b.x);
 	unsigned int diffY =abs(a.y-b.y);
 	return sqrt(diffX*diffX+diffY*diffY);
+
     }
     else
     {
 	return 0.0f;		
     }
 }
+
+bool isOrdered(list<TPoint> laListe)
+{
+
+  double tampon = 0.0;
+  list<TPoint>::iterator it;
+  laListe.reverse();
+  for(it=laListe.begin();it!=laListe.end();it++)
+  {
+    if(it->heuristic>tampon)
+    {
+	tampon=it->heuristic;
+    }
+    else
+    {
+	return false;
+    }
+  }
+  return true;
+
+}
+
+void orderNeibs(list<TPoint> & liste, TPoint a)
+{
+
+  multimap<double,TPoint> dict;
+   list<TPoint>::iterator it;
+  multimap<double,TPoint>::iterator mp;
+  for(it=liste.begin();it!=liste.end();it++)
+  {
+    it->heuristic=computeHeuristic(*it,a);
+  }
+  for(it=liste.begin();it!=liste.end();it++)
+  {
+    dict.insert(pair<double,TPoint>(it->heuristic,(*it)));
+  }
+  liste.clear();
+  for(mp=dict.begin();mp!=dict.end();mp++)
+  {
+    liste.push_back(mp->second);
+  }
+  liste.reverse();
+
+}
+
 
 TPoint minHeuristic(list<TPoint> aList)
 {
@@ -127,6 +180,7 @@ list<TPoint> PathFindAStar::computePath(TPoint  startPoint, TPoint endPoint)
 	myCloseList.push_front(current);
 	list<TPoint> neibs= myMap->getGraph()[current.x][current.y].points;
 	list<TPoint>::iterator p;
+        orderNeibs(neibs,endPoint);
 	for(p=neibs.begin();p!=neibs.end();p++)
 	{
 		
@@ -169,7 +223,7 @@ void PathFindAStar::computeHeuristics(TPoint goal)
     list<TPoint>::iterator it;
     for(it=myOpenList.begin();it!=myOpenList.end();it++)
     {
-	if(((*it).x!=goal.x)&&((*it).y!=goal.y))	
+	if(((*it).x!=goal.x)||((*it).y!=goal.y))	
 	{
 	    unsigned int diffX =abs((*it).x-goal.x);
 	    unsigned int diffY =abs((*it).y-goal.y);
