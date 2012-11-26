@@ -24,6 +24,7 @@
 
 #include "Renderer.h"
 using namespace sf;
+using namespace std;
 Renderer::Renderer()
 {
   myApp = new RenderWindow(VideoMode(800, 600, 32), "Find my path");
@@ -67,7 +68,7 @@ void Renderer::drawMap()
      for(int j=0;j<nC;j++)
      {
 	Shape carre;
-        if(map[i][j]==Wall)
+        if(map[i][j]==myMap->Wall)
 	{
 		carre.AddPoint(cx*i+0, cy*j+0, Color(0,0,0), Color(255,255,255));
 		carre.AddPoint(cx*i+0, cy*j+cy, Color(0,0,0), Color(255,255,255));
@@ -77,7 +78,7 @@ void Renderer::drawMap()
     		carre.EnableOutline(true); // Bordures activées
     		carre.SetOutlineWidth(1); // Bordures de taille 20 pixels
 	}
-	else if(map[i][j]==Dirt)
+	else if(map[i][j]==myMap->Dirt)
 	{
 		carre.AddPoint(cx*i+0, cy*j+0, Color(255, 90, 20), Color(255,255,255));
 		carre.AddPoint(cx*i+0, cy*j+cy, Color(255, 90, 20), Color(255,255,255));

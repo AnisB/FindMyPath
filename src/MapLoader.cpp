@@ -72,6 +72,8 @@ TMap*	MapLoader::LoadMap(std::string fileName)
 
     if(line=="B")
     {
+
+	    
     	    getline (myfile,line);
 	    int nL=StringToNumber (line );
 	    getline (myfile,line);
@@ -79,6 +81,10 @@ TMap*	MapLoader::LoadMap(std::string fileName)
 
 	    myMap = new TMap(nL,nC);
 	    char ** map =myMap->getGridMap();
+            getline(myfile,line);
+	    myMap->Dirt=line[0];
+            getline(myfile,line);
+	    myMap->Wall=line[0];
 		int l=0;
 		while ( myfile.good() && l<nL )
 		{
@@ -105,6 +111,11 @@ TMap*	MapLoader::LoadMap(std::string fileName)
 
 	    myMap = new TMap(nL,nC);
 	    char ** map =myMap->getGridMap();
+            getline(myfile,line);
+	    myMap->Dirt=line[0];
+            getline(myfile,line);
+	    myMap->Wall=line[0];
+            cout<<myMap->Wall<<" "<<myMap->Dirt<<endl;
 		int l=0;
 		while ( myfile.good() && l<nL )
 		{

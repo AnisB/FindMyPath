@@ -23,8 +23,12 @@
  */
 
 #include "Map.h"
+
+using namespace std;
 TMap::TMap(int x, int y)
 {
+    Wall = '0';
+    Dirt = '1';
     myMapSizeX=x;
     myMapSizeY=y;
     myGridMap = new  char * [myMapSizeX];

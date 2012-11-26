@@ -23,8 +23,7 @@
  */
 
 #include "Types.h"
-#define Wall 'T'
-#define Dirt '.'
+
 
 class TMap
 {
@@ -51,5 +50,7 @@ public:
     void GridToGraph();
 	
     void printMap();
+    char Wall;
+    char Dirt;
 };
 
