@@ -7,10 +7,15 @@ Theorically multiplatform (Linux, Windows, Mac) But only tested on Linux
 To use on linux:
 
 Clone
-Go into the Folder FindMyPath and use the following commands
+
+Go into the Folder FindMyPath and use the following commands:
+
 Mkdir build
+
 cd build
+
 cmake ..
+
 make
 
 
