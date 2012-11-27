@@ -17,8 +17,10 @@ target_link_libraries(testAStar ${SFML_LIBRARIES})
 add_executable(testDijkstra testDijkstra.cpp ${SOURCE})
 target_link_libraries(testDijkstra ${SFML_LIBRARIES})
 
-execute_process( COMMAND ${CMAKE_COMMAND}  -E create_symlink  ${PROJECT_SOURCE_DIR}/Samples/ ${PROJECT_BINARY_DIR}/Samples)
-message(STATUS ${PROJECT_BINARY_DIR}/Samples)
+message(STATUS ${CMAKE_SOURCE_DIR}/Samples/)
+message(STATUS ${CMAKE_BINARY_DIR}/test/Samples)
+execute_process( COMMAND ${CMAKE_COMMAND}  -E create_symlink  ${CMAKE_SOURCE_DIR}/Samples/ ${CMAKE_BINARY_DIR}/test/Samples)
+
 
 
  
