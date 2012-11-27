@@ -28,8 +28,8 @@ using namespace std;
 int main()
 {
     Renderer aRenderer;
-    aRenderer.getMap("Samples/midd.map");
-    aRenderer.AStar(5,5,40,40);
+    aRenderer.getMap("Samples/aMap.map");
+    aRenderer.Dijkstra(1,1,10,15);
     aRenderer.render();
     return 0;
 }

@@ -30,10 +30,9 @@
 #include <iostream>
 using namespace std;
 
+
+
 typedef map<pair<int,int>,pair<int,int> > Visited;
-
-
-
 
 
 double computeHeuristic(TPoint  a, TPoint b)
@@ -171,6 +170,7 @@ list<TPoint> PathFindAStar::computePath(TPoint  startPoint, TPoint endPoint)
 	myMap->getGraph()[startPoint.x][startPoint.y].poids+computeHeuristic(startPoint,endPoint);
     while(myOpenList.size()!=0)
     {
+
 	current=minHeuristic(myOpenList);
 	if((current.x==endPoint.x) && (current.y==endPoint.y))
 	{

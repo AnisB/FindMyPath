@@ -1,10 +1,10 @@
 /**
- * This file belongs to the FindMyPath project
- *
- * @see https://github.com/AnisB/FindMyPath
- * @author 2012-2013 Anis Benyoub <benyoub.anis@gmail.com>
- * @see The GNU Public License (GPL)
- */
+  * This file belongs to the FindMyPath project
+  *
+  * @see https://github.com/AnisB/FindMyPath
+  * @author 2012-2013 Anis Benyoub <benyoub.anis@gmail.com>
+  * @see The GNU Public License (GPL)
+  */
 
 /*
  * This program is free software; you can redistribute it and/or modify
@@ -21,22 +21,15 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
+
 #include <iostream>
-#include <SFML/Graphics.hpp>
-#include "MapLoader.h"
-class Renderer
+#include "Renderer.h"
+using namespace std;
+int main()
 {
-protected:
-    sf::RenderWindow * myApp;
-    TMap * myMap;
-    std::list<TPoint> path;
-public:
-    Renderer();
-    ~Renderer();
-    void render();
-    void drawMap();
-    void getMap(std::string aFileName);
-    void printMap();
-    void AStar(int x, int y , int x1, int y1);
-    void Dijkstra(int x, int y , int x1, int y1);
-};
+    Renderer aRenderer;
+    aRenderer.getMap("Samples/aMap.map");
+    aRenderer.AStar(1,1,10,15);
+    aRenderer.render();
+    return 0;
+}

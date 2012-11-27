@@ -23,6 +23,7 @@
  */
 
 #include "Renderer.h"
+#include "PathFindDijkstra.h"
 using namespace sf;
 using namespace std;
 Renderer::Renderer()
@@ -125,6 +126,13 @@ void Renderer::getMap(std::string aFileName)
 void Renderer::AStar(int x, int y , int x1, int y1)
 {
   PathFindAStar aPath;
+  aPath.setMap(myMap);
+  path=aPath.computePath(TPoint(x,y),TPoint(x1,y1));
+}
+
+void Renderer::Dijkstra(int x, int y , int x1, int y1)
+{
+  PathFindDijkstra aPath;
   aPath.setMap(myMap);
   path=aPath.computePath(TPoint(x,y),TPoint(x1,y1));
 }

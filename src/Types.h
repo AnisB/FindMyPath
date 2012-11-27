@@ -22,6 +22,19 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+#pragma once
+
+#if defined(TYPES_RECURSES)
+#error Recursive header files inclusion detected in TYPES.h
+#else // defined(TYPES_RECURSES)
+/** Prevents recursive inclusion of headers. */
+#define TYPES_RECURSES
+
+#if !defined TYPES_h
+/** Prevents repeated inclusion of headers. */
+#define TYPES_h
+
+
 #include <list>
 #include <map>
 #include <iostream>
@@ -60,5 +73,6 @@ public:
 };
 
 typedef std::map<int,std::map<int,TPoint> > Graph;
-
+#endif
+#endif
 

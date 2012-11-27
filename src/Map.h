@@ -22,6 +22,18 @@
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+
+#pragma once
+
+#if defined(MAP_RECURSES)
+#error Recursive header files inclusion detected in MAP.h
+#else // defined(MAP_RECURSES)
+/** Prevents recursive inclusion of headers. */
+#define MAP_RECURSES
+
+#if !defined MAP_h
+/** Prevents repeated inclusion of headers. */
+#define MAP_h
 #include "Types.h"
 
 
@@ -54,3 +66,5 @@ public:
     char Dirt;
 };
 
+#endif
+#endif
