@@ -28,7 +28,7 @@ using namespace std;
 int main()
 {
     Renderer aRenderer;
-    aRenderer.getMap("Samples/aMap.map");
+    aRenderer.getMap("samples/aMap.map");
     aRenderer.AStar(1,1,10,15);
     aRenderer.render();
     return 0;

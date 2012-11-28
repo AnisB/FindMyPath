@@ -28,8 +28,15 @@ using namespace sf;
 using namespace std;
 Renderer::Renderer()
 {
-  myApp = new RenderWindow(VideoMode(800, 600, 32), "Find my path");
-   
+  myApp = new RenderWindow(VideoMode(800, 800, 32), "Find my path");
+  if (!myImage.LoadFromFile("img/image.png"))  
+  {
+    cout<<"Problem"<<endl;
+  }
+  if (!myImage2.LoadFromFile("img/dirt1.png"))  
+  {
+    cout<<"Problem"<<endl;
+  }
 }
 Renderer::~Renderer()
 {
@@ -62,8 +69,8 @@ void Renderer::drawMap()
   char ** map=myMap->getGridMap();
   int nL = myMap->getSizeX();
   int nC = myMap->getSizeY();
-  int cx = 800/nL -1;
-  int cy = 600/nC ;
+  int cx = 800/nL+1 ;
+  int cy = 800/nC+1 ;
   for(int i=0;i<nL;i++)
   {
      for(int j=0;j<nC;j++)
@@ -71,33 +78,29 @@ void Renderer::drawMap()
 	Shape carre;
         if(map[i][j]==myMap->Wall)
 	{
-		carre.AddPoint(cx*i+0, cy*j+0, Color(0,0,0), Color(255,255,255));
-		carre.AddPoint(cx*i+0, cy*j+cy, Color(0,0,0), Color(255,255,255));
-		carre.AddPoint(cx*i+cx, cy*j+cy, Color(0,0,0), Color(255,255,255));
-		carre.AddPoint(cx*i+cx, cy*j+0, Color(0,0,0), Color(255,255,255));
-		carre.EnableFill(true); // Remplissage activé
-    		carre.EnableOutline(true); // Bordures activées
-    		carre.SetOutlineWidth(1); // Bordures de taille 20 pixels
+	   sf::Sprite Sprite2;
+	   Sprite2.SetImage(myImage);
+	   Sprite2.SetPosition(cx*i+1, cy*j+1);
+	   Sprite2.SetScale((double)(cx-2)*1.0/myImage.GetWidth(),(double)(cy-2)*1.0/myImage.GetHeight());
+	   myApp->Draw(Sprite2);
 	}
 	else if(map[i][j]==myMap->Dirt)
 	{
-		carre.AddPoint(cx*i+0, cy*j+0, Color(255, 90, 20), Color(255,255,255));
-		carre.AddPoint(cx*i+0, cy*j+cy, Color(255, 90, 20), Color(255,255,255));
-		carre.AddPoint(cx*i+cx, cy*j+cy, Color(255, 90, 20), Color(255,255,255));
-		carre.AddPoint(cx*i+cx, cy*j+0, Color(255, 90, 20), Color(255,255,255));
-		carre.EnableFill(true); // Remplissage activé
-		carre.EnableOutline(true); // Bordures activées
-		carre.SetOutlineWidth(1); // Bordures de taille 20 pixels
+	   sf::Sprite Sprite2;
+	   Sprite2.SetImage(myImage2);
+	   Sprite2.SetPosition(cx*i, cy*j);
+	   Sprite2.SetScale((double)(cx)*1.0/myImage2.GetWidth(),(double)(cy)*1.0/myImage2.GetHeight());
+	   myApp->Draw(Sprite2);
 	}
 	myApp->Draw(carre);
      }
   }
   std::list<TPoint>::iterator it=path.begin();
     Shape begin;
-    begin.AddPoint(cx*(*it).x+0, cy*(*it).y+0, Color(20,150,20), Color(255,255,255));
-    begin.AddPoint(cx*(*it).x+0, cy*(*it).y+cy, Color(20,150,20), Color(255,255,255));
-    begin.AddPoint(cx*(*it).x+cx, cy*(*it).y+cy, Color(20,150,20), Color(255,255,255));
-    begin.AddPoint(cx*(*it).x+cx, cy*(*it).y+0, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint((cx)*(*it).x+1, (cy)*(*it).y+1, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint((cx)*(*it).x+1, (cy)*(*it).y+cy-1, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint((cx)*(*it).x+cx-1, (cy)*(*it).y+cy-1, Color(20,150,20), Color(255,255,255));
+    begin.AddPoint((cx)*(*it).x+cx-1, (cy)*(*it).y+1, Color(20,150,20), Color(255,255,255));
     begin.EnableFill(true); // Remplissage activé
     begin.EnableOutline(true); // Bordures activées
     begin.SetOutlineWidth(1); // Bordures de taille 20 pixels
@@ -106,10 +109,10 @@ void Renderer::drawMap()
   for(;it!=path.end();it++)
   {
     Shape carre;
-    carre.AddPoint(cx*(*it).x+0, cy*(*it).y+0, Color(60,20,200), Color(255,255,255));
-    carre.AddPoint(cx*(*it).x+0, cy*(*it).y+cy, Color(60,20,200), Color(255,255,255));
-    carre.AddPoint(cx*(*it).x+cx, cy*(*it).y+cy, Color(260,20,200), Color(255,255,255));
-    carre.AddPoint(cx*(*it).x+cx, cy*(*it).y+0, Color(60,20,200), Color(255,255,255));
+    carre.AddPoint((cx)*(*it).x+1, (cy)*(*it).y+1, Color(60,20,200), Color(255,255,255));
+    carre.AddPoint((cx)*(*it).x+1, (cy)*(*it).y+cy-1, Color(60,20,200), Color(255,255,255));
+    carre.AddPoint((cx)*(*it).x+cx-1, (cy)*(*it).y+cy-1, Color(260,20,200), Color(255,255,255));
+    carre.AddPoint((cx)*(*it).x+cx-1, (cy)*(*it).y+1, Color(60,20,200), Color(255,255,255));
     carre.EnableFill(true); // Remplissage activé
     carre.EnableOutline(true); // Bordures activées
     carre.SetOutlineWidth(1); // Bordures de taille 20 pixels

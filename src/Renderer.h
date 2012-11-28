@@ -30,6 +30,8 @@ protected:
     sf::RenderWindow * myApp;
     TMap * myMap;
     std::list<TPoint> path;
+    sf::Image myImage;
+    sf::Image myImage2;
 public:
     Renderer();
     ~Renderer();

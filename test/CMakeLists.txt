@@ -19,6 +19,8 @@ target_link_libraries(testDijkstra ${SFML_LIBRARIES})
 
 execute_process( COMMAND ${CMAKE_COMMAND}  -E create_symlink  ${CMAKE_SOURCE_DIR}/samples/ ${CMAKE_BINARY_DIR}/test/samples)
 
+execute_process( COMMAND ${CMAKE_COMMAND}  -E create_symlink  ${CMAKE_SOURCE_DIR}/img/ ${CMAKE_BINARY_DIR}/test/img)
+
 
 
  
